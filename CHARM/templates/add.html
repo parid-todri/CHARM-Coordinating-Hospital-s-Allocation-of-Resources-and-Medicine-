@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+
+{% block title %}Add Item{% endblock %}
+
+{% block head %}
+<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+<style>
+    #reader {
+        width: 100%;
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        margin-bottom: 1rem;
+        display: none;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div style="max-width: 600px; margin: 0 auto;">
+    <div class="card">
+        <h2 class="text-center" style="margin-bottom: 0.5rem;">Add New Item</h2>
+        <p class="text-center" style="color: var(--text-muted); margin-bottom: 2rem;">Adding to Hospital {{
+            session.get('hospital') }}</p>
+
+        <!-- QR Reader Container -->
+        <div id="reader"></div>
+
+        <form method="POST">
+            <div class="form-group">
+                <label for="name" class="form-label"
+                    style="display: flex; justify-content: space-between; align-items: center;">
+                    Item Name
+                    <button type="button" class="btn btn-secondary" style="padding: 0.2rem 0.5rem; font-size: 0.8rem;"
+                        onclick="toggleScanner()">
+                        📷 Scan Barcode
+                    </button>
+                </label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="e.g. Surgical Masks"
+                    required>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="form-group">
+                    <label for="quantity" class="form-label">Quantity</label>
+                    <input type="number" class="form-control" id="quantity" name="quantity" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="cost" class="form-label">Cost ($)</label>
+                    <input type="number" step="0.01" class="form-control" id="cost" name="cost" min="0" required>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="form-group">
+                    <label for="date_added" class="form-label">Date Added</label>
+                    <input type="date" class="form-control" id="date_added" name="date_added" required>
+                </div>
+                <div class="form-group">
+                    <label for="expiry_date" class="form-label">Expiry Date</label>
+                    <input type="date" class="form-control" id="expiry_date" name="expiry_date" required>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; display: flex; gap: 1rem;">
+                <button type="submit" class="btn btn-primary" style="flex: 1;">Add Item</button>
+                <a href="/" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    let html5QrcodeScanner = null;
+
+    function toggleScanner() {
+        const reader = document.getElementById('reader');
+
+        if (reader.style.display === 'none' || !reader.style.display) {
+            reader.style.display = 'block';
+            startScanner();
+        } else {
+            stopScanner();
+        }
+    }
+
+    function startScanner() {
+        const formatsToSupport = [
+            Html5QrcodeSupportedFormats.QR_CODE,
+            Html5QrcodeSupportedFormats.UPC_A,
+            Html5QrcodeSupportedFormats.UPC_E,
+            Html5QrcodeSupportedFormats.UPC_EAN_EXTENSION,
+            Html5QrcodeSupportedFormats.EAN_13,
+            Html5QrcodeSupportedFormats.EAN_8,
+            Html5QrcodeSupportedFormats.CODE_128,
+            Html5QrcodeSupportedFormats.CODE_39,
+            Html5QrcodeSupportedFormats.CODE_93,
+            Html5QrcodeSupportedFormats.CODABAR,
+            Html5QrcodeSupportedFormats.ITF,
+            Html5QrcodeSupportedFormats.RSS_14,
+            Html5QrcodeSupportedFormats.RSS_EXPANDED
+        ];
+
+        html5QrcodeScanner = new Html5QrcodeScanner(
+            "reader",
+            {
+                fps: 10,
+                qrbox: { width: 250, height: 250 },
+                formatsToSupport: formatsToSupport
+            },
+            /* verbose= */ false
+        );
+        html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+    }
+
+    function stopScanner() {
+        if (html5QrcodeScanner) {
+            html5QrcodeScanner.clear().then(() => {
+                document.getElementById('reader').style.display = 'none';
+                html5QrcodeScanner = null;
+            }).catch(error => {
+                console.error("Failed to clear html5QrcodeScanner. ", error);
+            });
+        }
+    }
+
+    function onScanSuccess(decodedText, decodedResult) {
+        // Handle the scanned code as you like, for example:
+        console.log(`Code matched = ${decodedText}`, decodedResult);
+
+        // Fill the input
+        document.getElementById('name').value = decodedText;
+
+        // Stop scanning
+        stopScanner();
+
+        // Optional: Flash success or something
+        alert("Scanned: " + decodedText);
+    }
+
+    function onScanFailure(error) {
+        // handle scan failure, usually better to ignore and keep scanning.
+        // for example:
+        // console.warn(`Code scan error = ${error}`);
+    }
+</script>
+{% endblock %}

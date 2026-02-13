@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Inventory Management{% endblock %} - CHARM</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="/" class="navbar-brand">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="CHARM Logo" class="navbar-logo">
+            CHARM
+        </a>
+        <div class="nav-links">
+            {% if session.get('role') == 'hospital_admin' %}
+            <a href="/">Home</a>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/list">Inventory</a>
+            <a href="/request">Request</a>
+            <a href="/my_requests">My Requests</a>
+            <a href="/requests">Incoming</a>
+            {% elif session.get('role') == 'distributor' %}
+            <a href="/">Home</a>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/list">Inventory</a>
+            <a href="/requests">Requests</a>
+            {% endif %}
+        </div>
+        <div class="nav-user">
+            {% if session.get('username') %}
+            <span class="user-badge">{{ session.get('display_name', session.get('username')) }}</span>
+            <a href="/logout" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;">Logout</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <main class="main-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="flash-messages">
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer style="text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.875rem;">
+        &copy; 2026 CHARM: Coordinating Hospital's Allocation of Resources and Medicine. All rights reserved.
+    </footer>
+</body>
+
+</html>

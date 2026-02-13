@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block title %}My Requests{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <h2 style="margin: 0;">My Requests</h2>
+        <a href="/" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+
+    {% if requests %}
+    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        {% for req in requests %}
+        <div
+            style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.5rem; box-shadow: var(--shadow-sm);">
+            <!-- Request Header -->
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-color);">
+                <div>
+                    <span style="font-weight: 700; font-size: 1.1rem; color: var(--primary-color);">{{ req.item_name
+                        }}</span>
+                    <span
+                        style="background: #e0f2fe; color: #0284c7; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.85rem; font-weight: 600; margin-left: 0.5rem;">
+                        x{{ req.quantity }}
+                    </span>
+                </div>
+                <span style="padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600;
+                    {% if req.status == 'pending' %}
+                        background: #fdf6e3; color: #b45309;
+                    {% elif req.status == 'offered' %}
+                        background: #ede9fe; color: #7c3aed;
+                    {% elif req.status == 'accepted' %}
+                        background: #ecfdf5; color: #047857;
+                    {% else %}
+                        background: #fef2f2; color: #991b1b;
+                    {% endif %}
+                ">
+                    {{ req.status | upper }}
+                </span>
+            </div>
+
+            <!-- Offers Section -->
+            {% if req.offers and req.offers | length > 0 %}
+            <div style="margin-top: 0.5rem;">
+                <p style="font-weight: 600; color: var(--text-main); margin-bottom: 0.75rem; font-size: 0.9rem;">
+                    📩 {{ req.offers | length }} offer{{ 's' if req.offers | length > 1 else '' }} received:
+                </p>
+                {% for offer in req.offers %}
+                <div
+                    style="background: var(--background-color); border-radius: var(--radius-md); padding: 1rem; margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div style="font-weight: 600; color: var(--text-main);">Hospital {{ offer.offering_hospital }}
+                        </div>
+                        <div
+                            style="font-size: 1.25rem; font-weight: 700; color: var(--primary-color); margin-top: 0.25rem;">
+                            ${{ "%.2f" | format(offer.offer_price) }}
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 0.5rem; align-items: center;">
+                        {% if offer.status == 'pending' %}
+                        <form method="POST" action="/accept_offer/{{ req._id }}/{{ loop.index0 }}"
+                            style="display:inline;">
+                            <button type="submit" class="btn btn-primary"
+                                style="font-size: 0.8rem; padding: 0.4rem 0.8rem;">Accept</button>
+                        </form>
+                        <form method="POST" action="/decline_offer/{{ req._id }}/{{ loop.index0 }}"
+                            style="display:inline;">
+                            <button type="submit" class="btn btn-danger"
+                                style="font-size: 0.8rem; padding: 0.4rem 0.8rem;">Decline</button>
+                        </form>
+                        {% elif offer.status == 'accepted' %}
+                        <span
+                            style="background: #ecfdf5; color: #047857; padding: 0.3rem 0.6rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600;">✅
+                            ACCEPTED</span>
+                        {% elif offer.status == 'declined' %}
+                        <span
+                            style="background: #fef2f2; color: #991b1b; padding: 0.3rem 0.6rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600;">❌
+                            DECLINED</span>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div style="text-align: center; padding: 1.5rem; color: var(--text-muted); font-size: 0.9rem;">
+                ⏳ Waiting for offers...
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div
+        style="text-align: center; padding: 3rem 1rem; color: var(--text-muted); border: 2px dashed var(--border-color); border-radius: var(--radius-md);">
+        <div style="font-size: 3rem; margin-bottom: 1rem;">📋</div>
+        <p>You haven't made any requests yet.</p>
+        <a href="/request" class="btn btn-primary" style="margin-top: 1rem;">Make a Request</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

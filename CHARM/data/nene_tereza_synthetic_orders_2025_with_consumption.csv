@@ -1,0 +1,241 @@
+order_month,medication,quantity,purchase_date,expiration_date,quantity_used,avg_daily_consumption
+January,Paracetamol 500mg tablets,1151,2025-01-06,2026-12-27,1004,32.39
+January,Amoxicillin 500mg capsules,634,2025-01-06,2026-06-30,555,17.9
+January,Ceftriaxone 1g injection,138,2025-01-06,2026-01-01,125,4.03
+January,Ibuprofen 400mg tablets,466,2025-01-06,2026-12-27,428,13.81
+January,Metformin 850mg tablets,388,2025-01-06,2027-12-22,369,11.9
+January,Salbutamol inhaler,76,2025-01-06,2026-06-30,68,2.19
+January,Insulin glargine,66,2025-01-06,2026-01-01,54,1.74
+January,Omeprazole 20mg capsules,301,2025-01-06,2026-12-27,246,7.94
+January,Enoxaparin injection,98,2025-01-06,2026-04-01,84,2.71
+January,Diazepam injection,20,2025-01-06,2026-01-01,17,0.55
+January,Furosemide 40mg tablets,198,2025-01-06,2027-12-22,155,5.0
+January,Atorvastatin 20mg tablets,332,2025-01-06,2027-12-22,302,9.74
+January,Hydrocortisone injection,72,2025-01-06,2026-06-30,61,1.97
+January,Adrenaline ampoules,47,2025-01-06,2026-01-01,42,1.35
+January,Meropenem 1g injection,22,2025-01-06,2026-06-30,21,0.68
+January,Vancomycin injection,36,2025-01-06,2026-06-30,30,0.97
+January,Heparin sodium,83,2025-01-06,2026-04-01,66,2.13
+January,Ringer’s lactate solution,212,2025-01-06,2027-12-22,188,6.06
+January,Normal saline solution,353,2025-01-06,2027-12-22,274,8.84
+January,Vitamin C injection,128,2025-01-06,2026-12-27,102,3.29
+February,Paracetamol 500mg tablets,1163,2025-02-06,2027-01-27,1009,36.04
+February,Amoxicillin 500mg capsules,607,2025-02-06,2026-07-31,514,18.36
+February,Ceftriaxone 1g injection,145,2025-02-06,2026-02-01,124,4.43
+February,Ibuprofen 400mg tablets,539,2025-02-06,2027-01-27,431,15.39
+February,Metformin 850mg tablets,422,2025-02-06,2028-01-22,329,11.75
+February,Salbutamol inhaler,74,2025-02-06,2026-07-31,67,2.39
+February,Insulin glargine,63,2025-02-06,2026-02-01,55,1.96
+February,Omeprazole 20mg capsules,301,2025-02-06,2027-01-27,262,9.36
+February,Enoxaparin injection,106,2025-02-06,2026-05-02,95,3.39
+February,Diazepam injection,18,2025-02-06,2026-02-01,17,0.61
+February,Furosemide 40mg tablets,212,2025-02-06,2028-01-22,166,5.93
+February,Atorvastatin 20mg tablets,385,2025-02-06,2028-01-22,299,10.68
+February,Hydrocortisone injection,50,2025-02-06,2026-07-31,45,1.61
+February,Adrenaline ampoules,51,2025-02-06,2026-02-01,41,1.46
+February,Meropenem 1g injection,25,2025-02-06,2026-07-31,22,0.79
+February,Vancomycin injection,33,2025-02-06,2026-07-31,29,1.04
+February,Heparin sodium,84,2025-02-06,2026-05-02,69,2.46
+February,Ringer’s lactate solution,238,2025-02-06,2028-01-22,175,6.25
+February,Normal saline solution,243,2025-02-06,2028-01-22,211,7.54
+February,Vitamin C injection,123,2025-02-06,2027-01-27,105,3.75
+March,Paracetamol 500mg tablets,1369,2025-03-07,2027-02-25,1176,37.94
+March,Amoxicillin 500mg capsules,491,2025-03-07,2026-08-29,383,12.35
+March,Ceftriaxone 1g injection,140,2025-03-07,2026-03-02,119,3.84
+March,Ibuprofen 400mg tablets,501,2025-03-07,2027-02-25,431,13.9
+March,Metformin 850mg tablets,426,2025-03-07,2028-02-20,335,10.81
+March,Salbutamol inhaler,82,2025-03-07,2026-08-29,68,2.19
+March,Insulin glargine,70,2025-03-07,2026-03-02,59,1.9
+March,Omeprazole 20mg capsules,320,2025-03-07,2027-02-25,264,8.52
+March,Enoxaparin injection,103,2025-03-07,2026-05-31,81,2.61
+March,Diazepam injection,20,2025-03-07,2026-03-02,18,0.58
+March,Furosemide 40mg tablets,203,2025-03-07,2028-02-20,172,5.55
+March,Atorvastatin 20mg tablets,368,2025-03-07,2028-02-20,316,10.19
+March,Hydrocortisone injection,54,2025-03-07,2026-08-29,42,1.35
+March,Adrenaline ampoules,49,2025-03-07,2026-03-02,38,1.23
+March,Meropenem 1g injection,25,2025-03-07,2026-08-29,21,0.68
+March,Vancomycin injection,35,2025-03-07,2026-08-29,30,0.97
+March,Heparin sodium,96,2025-03-07,2026-05-31,76,2.45
+March,Ringer’s lactate solution,203,2025-03-07,2028-02-20,178,5.74
+March,Normal saline solution,292,2025-03-07,2028-02-20,258,8.32
+March,Vitamin C injection,119,2025-03-07,2027-02-25,107,3.45
+April,Paracetamol 500mg tablets,1330,2025-04-05,2027-03-26,1096,36.53
+April,Amoxicillin 500mg capsules,455,2025-04-05,2026-09-27,410,13.67
+April,Ceftriaxone 1g injection,156,2025-04-05,2026-03-31,121,4.03
+April,Ibuprofen 400mg tablets,526,2025-04-05,2027-03-26,429,14.3
+April,Metformin 850mg tablets,402,2025-04-05,2028-03-20,316,10.53
+April,Salbutamol inhaler,72,2025-04-05,2026-09-27,63,2.1
+April,Insulin glargine,64,2025-04-05,2026-03-31,49,1.63
+April,Omeprazole 20mg capsules,315,2025-04-05,2027-03-26,237,7.9
+April,Enoxaparin injection,91,2025-04-05,2026-06-29,77,2.57
+April,Diazepam injection,18,2025-04-05,2026-03-31,16,0.53
+April,Furosemide 40mg tablets,189,2025-04-05,2028-03-20,154,5.13
+April,Atorvastatin 20mg tablets,338,2025-04-05,2028-03-20,269,8.97
+April,Hydrocortisone injection,57,2025-04-05,2026-09-27,47,1.57
+April,Adrenaline ampoules,50,2025-04-05,2026-03-31,39,1.3
+April,Meropenem 1g injection,23,2025-04-05,2026-09-27,19,0.63
+April,Vancomycin injection,38,2025-04-05,2026-09-27,30,1.0
+April,Heparin sodium,103,2025-04-05,2026-06-29,71,2.37
+April,Ringer’s lactate solution,269,2025-04-05,2028-03-20,206,6.87
+April,Normal saline solution,288,2025-04-05,2028-03-20,238,7.93
+April,Vitamin C injection,110,2025-04-05,2027-03-26,104,3.47
+May,Paracetamol 500mg tablets,1180,2025-05-03,2027-04-23,1020,32.9
+May,Amoxicillin 500mg capsules,487,2025-05-03,2026-10-25,379,12.23
+May,Ceftriaxone 1g injection,148,2025-05-03,2026-04-28,131,4.23
+May,Ibuprofen 400mg tablets,474,2025-05-03,2027-04-23,435,14.03
+May,Metformin 850mg tablets,325,2025-05-03,2028-04-17,283,9.13
+May,Salbutamol inhaler,68,2025-05-03,2026-10-25,63,2.03
+May,Insulin glargine,64,2025-05-03,2026-04-28,60,1.94
+May,Omeprazole 20mg capsules,277,2025-05-03,2027-04-23,233,7.52
+May,Enoxaparin injection,101,2025-05-03,2026-07-27,82,2.65
+May,Diazepam injection,21,2025-05-03,2026-04-28,16,0.52
+May,Furosemide 40mg tablets,164,2025-05-03,2028-04-17,149,4.81
+May,Atorvastatin 20mg tablets,271,2025-05-03,2028-04-17,252,8.13
+May,Hydrocortisone injection,56,2025-05-03,2026-10-25,45,1.45
+May,Adrenaline ampoules,45,2025-05-03,2026-04-28,38,1.23
+May,Meropenem 1g injection,26,2025-05-03,2026-10-25,24,0.77
+May,Vancomycin injection,34,2025-05-03,2026-10-25,28,0.9
+May,Heparin sodium,98,2025-05-03,2026-07-27,72,2.32
+May,Ringer’s lactate solution,251,2025-05-03,2028-04-17,199,6.42
+May,Normal saline solution,279,2025-05-03,2028-04-17,220,7.1
+May,Vitamin C injection,137,2025-05-03,2027-04-23,104,3.35
+June,Paracetamol 500mg tablets,1037,2025-06-04,2027-05-25,944,31.47
+June,Amoxicillin 500mg capsules,524,2025-06-04,2026-11-26,431,14.37
+June,Ceftriaxone 1g injection,144,2025-06-04,2026-05-30,130,4.33
+June,Ibuprofen 400mg tablets,419,2025-06-04,2027-05-25,345,11.5
+June,Metformin 850mg tablets,422,2025-06-04,2028-05-19,362,12.07
+June,Salbutamol inhaler,81,2025-06-04,2026-11-26,68,2.27
+June,Insulin glargine,66,2025-06-04,2026-05-30,59,1.97
+June,Omeprazole 20mg capsules,258,2025-06-04,2027-05-25,221,7.37
+June,Enoxaparin injection,106,2025-06-04,2026-08-28,87,2.9
+June,Diazepam injection,21,2025-06-04,2026-05-30,18,0.6
+June,Furosemide 40mg tablets,158,2025-06-04,2028-05-19,139,4.63
+June,Atorvastatin 20mg tablets,238,2025-06-04,2028-05-19,206,6.87
+June,Hydrocortisone injection,57,2025-06-04,2026-11-26,47,1.57
+June,Adrenaline ampoules,61,2025-06-04,2026-05-30,32,1.07
+June,Meropenem 1g injection,27,2025-06-04,2026-11-26,22,0.73
+June,Vancomycin injection,42,2025-06-04,2026-11-26,32,1.07
+June,Heparin sodium,92,2025-06-04,2026-08-28,71,2.37
+June,Ringer’s lactate solution,211,2025-06-04,2028-05-19,176,5.87
+June,Normal saline solution,283,2025-06-04,2028-05-19,254,8.47
+June,Vitamin C injection,106,2025-06-04,2027-05-25,87,2.9
+July,Paracetamol 500mg tablets,1364,2025-07-07,2027-06-27,1078,34.77
+July,Amoxicillin 500mg capsules,517,2025-07-07,2026-12-29,416,13.42
+July,Ceftriaxone 1g injection,133,2025-07-07,2026-07-02,98,3.16
+July,Ibuprofen 400mg tablets,394,2025-07-07,2027-06-27,375,12.1
+July,Metformin 850mg tablets,328,2025-07-07,2028-06-21,293,9.45
+July,Salbutamol inhaler,80,2025-07-07,2026-12-29,67,2.16
+July,Insulin glargine,62,2025-07-07,2026-07-02,53,1.71
+July,Omeprazole 20mg capsules,273,2025-07-07,2027-06-27,243,7.84
+July,Enoxaparin injection,107,2025-07-07,2026-09-30,80,2.58
+July,Diazepam injection,21,2025-07-07,2026-07-02,17,0.55
+July,Furosemide 40mg tablets,216,2025-07-07,2028-06-21,172,5.55
+July,Atorvastatin 20mg tablets,350,2025-07-07,2028-06-21,297,9.58
+July,Hydrocortisone injection,56,2025-07-07,2026-12-29,44,1.42
+July,Adrenaline ampoules,38,2025-07-07,2026-07-02,33,1.06
+July,Meropenem 1g injection,22,2025-07-07,2026-12-29,22,0.71
+July,Vancomycin injection,35,2025-07-07,2026-12-29,28,0.9
+July,Heparin sodium,80,2025-07-07,2026-09-30,68,2.19
+July,Ringer’s lactate solution,219,2025-07-07,2028-06-21,159,5.13
+July,Normal saline solution,290,2025-07-07,2028-06-21,233,7.52
+July,Vitamin C injection,115,2025-07-07,2027-06-27,85,2.74
+August,Paracetamol 500mg tablets,1048,2025-08-05,2027-07-26,942,30.39
+August,Amoxicillin 500mg capsules,536,2025-08-05,2027-01-27,454,14.65
+August,Ceftriaxone 1g injection,148,2025-08-05,2026-07-31,121,3.9
+August,Ibuprofen 400mg tablets,496,2025-08-05,2027-07-26,408,13.16
+August,Metformin 850mg tablets,328,2025-08-05,2028-07-20,294,9.48
+August,Salbutamol inhaler,75,2025-08-05,2027-01-27,61,1.97
+August,Insulin glargine,46,2025-08-05,2026-07-31,37,1.19
+August,Omeprazole 20mg capsules,316,2025-08-05,2027-07-26,250,8.06
+August,Enoxaparin injection,100,2025-08-05,2026-10-29,77,2.48
+August,Diazepam injection,22,2025-08-05,2026-07-31,17,0.55
+August,Furosemide 40mg tablets,200,2025-08-05,2028-07-20,150,4.84
+August,Atorvastatin 20mg tablets,368,2025-08-05,2028-07-20,289,9.32
+August,Hydrocortisone injection,54,2025-08-05,2027-01-27,46,1.48
+August,Adrenaline ampoules,43,2025-08-05,2026-07-31,38,1.23
+August,Meropenem 1g injection,30,2025-08-05,2027-01-27,24,0.77
+August,Vancomycin injection,38,2025-08-05,2027-01-27,31,1.0
+August,Heparin sodium,69,2025-08-05,2026-10-29,58,1.87
+August,Ringer’s lactate solution,192,2025-08-05,2028-07-20,154,4.97
+August,Normal saline solution,316,2025-08-05,2028-07-20,281,9.06
+August,Vitamin C injection,116,2025-08-05,2027-07-26,92,2.97
+September,Paracetamol 500mg tablets,1310,2025-09-03,2027-08-24,1023,34.1
+September,Amoxicillin 500mg capsules,481,2025-09-03,2027-02-25,444,14.8
+September,Ceftriaxone 1g injection,128,2025-09-03,2026-08-29,117,3.9
+September,Ibuprofen 400mg tablets,403,2025-09-03,2027-08-24,347,11.57
+September,Metformin 850mg tablets,414,2025-09-03,2028-08-18,374,12.47
+September,Salbutamol inhaler,83,2025-09-03,2027-02-25,71,2.37
+September,Insulin glargine,66,2025-09-03,2026-08-29,53,1.77
+September,Omeprazole 20mg capsules,263,2025-09-03,2027-08-24,225,7.5
+September,Enoxaparin injection,89,2025-09-03,2026-11-27,81,2.7
+September,Diazepam injection,18,2025-09-03,2026-08-29,16,0.53
+September,Furosemide 40mg tablets,192,2025-09-03,2028-08-18,158,5.27
+September,Atorvastatin 20mg tablets,291,2025-09-03,2028-08-18,244,8.13
+September,Hydrocortisone injection,46,2025-09-03,2027-02-25,40,1.33
+September,Adrenaline ampoules,41,2025-09-03,2026-08-29,36,1.2
+September,Meropenem 1g injection,21,2025-09-03,2027-02-25,20,0.67
+September,Vancomycin injection,37,2025-09-03,2027-02-25,29,0.97
+September,Heparin sodium,81,2025-09-03,2026-11-27,68,2.27
+September,Ringer’s lactate solution,287,2025-09-03,2028-08-18,221,7.37
+September,Normal saline solution,256,2025-09-03,2028-08-18,224,7.47
+September,Vitamin C injection,130,2025-09-03,2027-08-24,114,3.8
+October,Paracetamol 500mg tablets,1213,2025-10-05,2027-09-25,1052,33.94
+October,Amoxicillin 500mg capsules,495,2025-10-05,2027-03-29,445,14.35
+October,Ceftriaxone 1g injection,145,2025-10-05,2026-09-30,116,3.74
+October,Ibuprofen 400mg tablets,457,2025-10-05,2027-09-25,401,12.94
+October,Metformin 850mg tablets,431,2025-10-05,2028-09-19,340,10.97
+October,Salbutamol inhaler,77,2025-10-05,2027-03-29,66,2.13
+October,Insulin glargine,69,2025-10-05,2026-09-30,57,1.84
+October,Omeprazole 20mg capsules,271,2025-10-05,2027-09-25,212,6.84
+October,Enoxaparin injection,91,2025-10-05,2026-12-29,81,2.61
+October,Diazepam injection,16,2025-10-05,2026-09-30,15,0.48
+October,Furosemide 40mg tablets,170,2025-10-05,2028-09-19,136,4.39
+October,Atorvastatin 20mg tablets,307,2025-10-05,2028-09-19,268,8.65
+October,Hydrocortisone injection,52,2025-10-05,2027-03-29,47,1.52
+October,Adrenaline ampoules,46,2025-10-05,2026-09-30,41,1.32
+October,Meropenem 1g injection,28,2025-10-05,2027-03-29,23,0.74
+October,Vancomycin injection,27,2025-10-05,2027-03-29,24,0.77
+October,Heparin sodium,79,2025-10-05,2026-12-29,70,2.26
+October,Ringer’s lactate solution,230,2025-10-05,2028-09-19,191,6.16
+October,Normal saline solution,312,2025-10-05,2028-09-19,247,7.97
+October,Vitamin C injection,111,2025-10-05,2027-09-25,100,3.23
+November,Paracetamol 500mg tablets,1384,2025-11-07,2027-10-28,1138,37.93
+November,Amoxicillin 500mg capsules,592,2025-11-07,2027-05-01,515,17.17
+November,Ceftriaxone 1g injection,185,2025-11-07,2026-11-02,147,4.9
+November,Ibuprofen 400mg tablets,564,2025-11-07,2027-10-28,435,14.5
+November,Metformin 850mg tablets,354,2025-11-07,2028-10-22,289,9.63
+November,Salbutamol inhaler,76,2025-11-07,2027-05-01,67,2.23
+November,Insulin glargine,56,2025-11-07,2026-11-02,46,1.53
+November,Omeprazole 20mg capsules,320,2025-11-07,2027-10-28,270,9.0
+November,Enoxaparin injection,113,2025-11-07,2027-01-31,87,2.9
+November,Diazepam injection,24,2025-11-07,2026-11-02,19,0.63
+November,Furosemide 40mg tablets,189,2025-11-07,2028-10-22,155,5.17
+November,Atorvastatin 20mg tablets,351,2025-11-07,2028-10-22,314,10.47
+November,Hydrocortisone injection,49,2025-11-07,2027-05-01,40,1.33
+November,Adrenaline ampoules,51,2025-11-07,2026-11-02,39,1.3
+November,Meropenem 1g injection,20,2025-11-07,2027-05-01,17,0.57
+November,Vancomycin injection,36,2025-11-07,2027-05-01,30,1.0
+November,Heparin sodium,102,2025-11-07,2027-01-31,76,2.53
+November,Ringer’s lactate solution,224,2025-11-07,2028-10-22,193,6.43
+November,Normal saline solution,264,2025-11-07,2028-10-22,222,7.4
+November,Vitamin C injection,128,2025-11-07,2027-10-28,105,3.5
+December,Paracetamol 500mg tablets,1431,2025-12-05,2027-11-25,1122,36.19
+December,Amoxicillin 500mg capsules,583,2025-12-05,2027-05-29,506,16.32
+December,Ceftriaxone 1g injection,190,2025-12-05,2026-11-30,152,4.9
+December,Ibuprofen 400mg tablets,554,2025-12-05,2027-11-25,430,13.87
+December,Metformin 850mg tablets,415,2025-12-05,2028-11-19,322,10.39
+December,Salbutamol inhaler,107,2025-12-05,2027-05-29,89,2.87
+December,Insulin glargine,70,2025-12-05,2026-11-30,57,1.84
+December,Omeprazole 20mg capsules,323,2025-12-05,2027-11-25,277,8.94
+December,Enoxaparin injection,94,2025-12-05,2027-02-28,80,2.58
+December,Diazepam injection,18,2025-12-05,2026-11-30,16,0.52
+December,Furosemide 40mg tablets,190,2025-12-05,2028-11-19,161,5.19
+December,Atorvastatin 20mg tablets,354,2025-12-05,2028-11-19,304,9.81
+December,Hydrocortisone injection,67,2025-12-05,2027-05-29,58,1.87
+December,Adrenaline ampoules,48,2025-12-05,2026-11-30,37,1.19
+December,Meropenem 1g injection,23,2025-12-05,2027-05-29,22,0.71
+December,Vancomycin injection,38,2025-12-05,2027-05-29,31,1.0
+December,Heparin sodium,84,2025-12-05,2027-02-28,74,2.39
+December,Ringer’s lactate solution,228,2025-12-05,2028-11-19,199,6.42
+December,Normal saline solution,313,2025-12-05,2028-11-19,264,8.52
+December,Vitamin C injection,129,2025-12-05,2027-11-25,123,3.97

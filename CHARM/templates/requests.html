@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block title %}Incoming Requests{% endblock %}
+
+{% block head %}
+<style>
+    .offer-modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .offer-modal-overlay.active {
+        display: flex;
+    }
+
+    .offer-modal {
+        background: white;
+        border-radius: var(--radius-lg);
+        padding: 2rem;
+        width: 100%;
+        max-width: 400px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        animation: slideUp 0.2s ease;
+    }
+
+    @keyframes slideUp {
+        from {
+            transform: translateY(20px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .offer-modal h3 {
+        margin-bottom: 0.5rem;
+    }
+
+    .offer-modal .form-group {
+        margin-top: 1.5rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <h2 style="margin: 0;">Incoming Requests</h2>
+        <a href="/" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+
+    {% if requests %}
+    <div class="dashboard-grid" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
+        {% for req in requests %}
+        <div
+            style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.5rem; box-shadow: var(--shadow-sm);">
+            <div
+                style="display: flex; justify-content: space-between; margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">
+                <span style="font-weight: 700; color: var(--primary-color);">{{ req.item_name }}</span>
+                <span
+                    style="background: #ecfdf5; color: #047857; padding: 0.25rem 0.5rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600;">
+                    {{ req.status | upper | default('PENDING') }}
+                </span>
+            </div>
+            <div style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.8;">
+                <div><strong>From:</strong> Hospital {{ req.requesting_hospital }}</div>
+                <div>
+                    <strong>Quantity:</strong>
+                    <span
+                        style="background: #e0f2fe; color: #0284c7; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.85rem; font-weight: 600;">
+                        {{ req.quantity | default('N/A') }}
+                    </span>
+                </div>
+            </div>
+            {% if session.get('role') == 'hospital_admin' and req.status == 'pending' %}
+            <div style="margin-top: 1rem;">
+                <button class="btn btn-primary" style="font-size: 0.8rem; padding: 0.4rem 0.8rem; width: 100%;"
+                    onclick="openOfferModal('{{ req._id }}', '{{ req.item_name }}', '{{ req.requesting_hospital }}', '{{ req.quantity }}')">
+                    Make an Offer
+                </button>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div
+        style="text-align: center; padding: 3rem 1rem; color: var(--text-muted); border: 2px dashed var(--border-color); border-radius: var(--radius-md);">
+        <div style="font-size: 3rem; margin-bottom: 1rem;">📭</div>
+        <p>No supply requests at the moment.</p>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Offer Modal -->
+<div class="offer-modal-overlay" id="offerModal">
+    <div class="offer-modal">
+        <h3 style="color: var(--primary-color);">Make an Offer</h3>
+        <p id="modalDescription" style="color: var(--text-muted); font-size: 0.9rem;"></p>
+        <form id="offerForm" method="POST">
+            <div class="form-group">
+                <label for="offer_price" class="form-label">Your Price ($)</label>
+                <input type="number" step="0.01" min="0" class="form-control" id="offer_price" name="offer_price"
+                    placeholder="Enter your price" required>
+            </div>
+            <div style="display: flex; gap: 0.75rem; margin-top: 1.5rem;">
+                <button type="submit" class="btn btn-primary" style="flex: 1;">Send Offer</button>
+                <button type="button" class="btn btn-secondary" onclick="closeOfferModal()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function openOfferModal(requestId, itemName, fromHospital, quantity) {
+        document.getElementById('offerForm').action = '/make_offer/' + requestId;
+        document.getElementById('modalDescription').textContent =
+            'Hospital ' + fromHospital + ' needs ' + quantity + 'x ' + itemName + '. Name your price.';
+        document.getElementById('offerModal').classList.add('active');
+        document.getElementById('offer_price').focus();
+    }
+    function closeOfferModal() {
+        document.getElementById('offerModal').classList.remove('active');
+    }
+    // Close on backdrop click
+    document.getElementById('offerModal').addEventListener('click', function (e) {
+        if (e.target === this) closeOfferModal();
+    });
+</script>
+{% endblock %}

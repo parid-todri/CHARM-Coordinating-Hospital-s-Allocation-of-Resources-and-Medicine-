@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div style="padding: 1rem 1rem 0.5rem; text-align: center;">
+    <h1 style="font-size: 3rem; color: var(--primary-color); margin: 0; letter-spacing: -0.05em;">CHARM</h1>
+    <p style="font-size: 1.1rem; color: var(--text-muted); max-width: 600px; margin: 0.25rem auto 1.5rem;">
+        Coordinating Hospital's Allocation of Resources and Medicine
+    </p>
+
+    <div
+        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; max-width: 1200px; margin: 0 auto; padding-bottom: 2rem;">
+
+        <!-- Quick Actions based on Role -->
+        {% if session.get('role') == 'hospital_admin' %}
+        <div class="card home-card">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏥</div>
+            <h3>Manage Inventory</h3>
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">View stock levels and add supplies.</p>
+            <div style="display: flex; gap: 0.5rem;">
+                <a href="/list" class="btn btn-primary" style="flex: 1;">View</a>
+                <a href="/add" class="btn btn-secondary">Add</a>
+            </div>
+        </div>
+
+        <div class="card home-card">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔄</div>
+            <h3>Network Requests</h3>
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Request supplies or help others.</p>
+            <div style="display: flex; gap: 0.5rem;">
+                <a href="/request" class="btn btn-primary" style="flex: 1;">Request</a>
+                <a href="/requests" class="btn btn-secondary">Incoming</a>
+            </div>
+        </div>
+
+        {% elif session.get('role') == 'distributor' %}
+        <div class="card home-card">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">📦</div>
+            <h3>Network Inventory</h3>
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Monitor stock across all hospitals.</p>
+            <a href="/list" class="btn btn-primary" style="width: 100%;">View All</a>
+        </div>
+
+        <div class="card home-card">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🚚</div>
+            <h3>Active Requests</h3>
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Manage incoming supply requests.</p>
+            <a href="/requests" class="btn btn-primary" style="width: 100%;">View Requests</a>
+        </div>
+        {% endif %}
+
+        <!-- Analytics Link for Everyone -->
+        <div class="card home-card" style="background: #f0fdf4; border-color: #bbf7d0;">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">📊</div>
+            <h3 style="color: #166534;">Analytics</h3>
+            <p style="color: #166534; margin-bottom: 1rem;">View usage trends and reports.</p>
+            <a href="/dashboard" class="btn" style="width: 90%; background: #166534; color: white;">Open Dashboard</a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

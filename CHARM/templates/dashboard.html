@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+
+{% block title %}Analytics Dashboard{% endblock %}
+
+{% block head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+    .chart-container {
+        background: white;
+        border-radius: var(--radius-lg);
+        padding: 1.5rem;
+        box-shadow: var(--shadow-md);
+        border: 1px solid var(--border-color);
+        margin-bottom: 2rem;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .stat-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-sm);
+        border: 1px solid var(--border-color);
+        text-align: center;
+    }
+
+    .stat-value {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        margin: 0.5rem 0;
+    }
+
+    .stat-label {
+        color: var(--text-muted);
+        font-weight: 500;
+        font-size: 0.9rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div style="max-width: 1200px; margin: 0 auto;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <h1>Analytics Dashboard</h1>
+        <form method="GET" action="/dashboard" style="margin: 0;">
+            <select name="month" onchange="this.form.submit()"
+                style="padding: 0.5rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); font-size: 1rem; cursor: pointer;">
+                {% for m in available_months %}
+                <option value="{{ m }}" {% if m==selected_month %}selected{% endif %}>📅 {{ m }}</option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+
+    <!-- Key Stats Row -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-label">Total Medications Used</div>
+            <div class="stat-value">{{ usage_data | map(attribute='total_usage') | sum }}</div>
+            <div style="font-size: 0.8rem; color: #059669;">Units dispensed</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Most Used Medication</div>
+            <div class="stat-value" style="font-size: 1.5rem;">
+                {{ usage_data[0]._id if usage_data else 'N/A' }}
+            </div>
+            <div style="font-size: 0.8rem; color: var(--text-muted);">
+                {{ usage_data[0].total_usage if usage_data else 0 }} units
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Stock Efficiency</div>
+            <div class="stat-value">94%</div>
+            <div style="font-size: 0.8rem; color: #059669;">Optimal levels</div>
+        </div>
+        <div class="stat-card" style="border-left: 4px solid #ef4444;">
+            <div class="stat-label">Expiring Soon (90 Days)</div>
+            <div class="stat-value" style="color: #ef4444;">{{ expiring_count }}</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted);">Items need attention</div>
+        </div>
+        <div class="stat-card" style="border-left: 4px solid #f59e0b;">
+            <div class="stat-label">Low Stock (< 100)</div>
+                    <div class="stat-value" style="color: #f59e0b;">{{ low_stock_count }}</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">Reorder recommended</div>
+            </div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+
+            <!-- Usage by Medication -->
+            <div class="chart-container">
+                <h3>Top Medications Used</h3>
+                <canvas id="usageChart"></canvas>
+            </div>
+
+            <!-- Purchase vs Usage -->
+            <div class="chart-container">
+                <h3>Stock Flow (Purchase vs Usage)</h3>
+                <canvas id="balanceChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data passed from Flask
+        const usageData = {{ usage_data | tojson }};
+        const balanceData = {{ balance_data | tojson }};
+
+
+        // 1. Usage Chart
+        new Chart(document.getElementById('usageChart'), {
+            type: 'bar',
+            data: {
+                labels: usageData.map(d => d._id),
+                datasets: [{
+                    label: 'Units Used',
+                    data: usageData.map(d => d.total_usage),
+                    backgroundColor: 'rgba(13, 148, 136, 0.6)',
+                    borderColor: 'rgb(13, 148, 136)',
+                    borderWidth: 1,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+
+        // 2. Balance Chart
+        new Chart(document.getElementById('balanceChart'), {
+            type: 'bar',
+            data: {
+                labels: balanceData.map(d => d._id),
+                datasets: [
+                    {
+                        label: 'Purchased',
+                        data: balanceData.map(d => d.purchased),
+                        backgroundColor: 'rgba(59, 130, 246, 0.6)', // Blue
+                        borderRadius: 4
+                    },
+                    {
+                        label: 'Used',
+                        data: balanceData.map(d => d.used),
+                        backgroundColor: 'rgba(239, 68, 68, 0.6)', // Red
+                        borderRadius: 4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    </script>
+    {% endblock %}

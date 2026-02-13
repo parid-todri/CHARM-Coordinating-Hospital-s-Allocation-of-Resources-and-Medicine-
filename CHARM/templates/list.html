@@ -1,0 +1,214 @@
+{% extends "base.html" %}
+
+{% block title %}Inventory List{% endblock %}
+
+{% block head %}
+<style>
+    .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .modal-overlay.active {
+        display: flex;
+    }
+
+    .modal-box {
+        background: white;
+        border-radius: var(--radius-lg);
+        padding: 2rem;
+        width: 100%;
+        max-width: 400px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div style="max-width: 1200px; margin: 0 auto;">
+
+    <!-- Inventory Section -->
+    <div class="card" style="margin-bottom: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <h2 style="margin: 0;">
+                {% if session.get('role') == 'hospital_admin' %}
+                Hospital {{ hospital }} Inventory
+                {% else %}
+                All Hospital Inventory
+                {% endif %}
+            </h2>
+            <a href="/" class="btn btn-secondary">Back to Dashboard</a>
+        </div>
+
+        {% if session.get('role') == 'distributor' %}
+        <form method="GET" action="/list" style="margin-bottom: 2rem; display: flex; gap: 1rem; align-items: flex-end;">
+            <div class="form-group" style="margin-bottom: 0; flex: 1;">
+                <label for="hospital" class="form-label">Filter by Hospital</label>
+                <select class="form-control" id="hospital" name="hospital" required>
+                    <option value="" disabled selected>Select Hospital</option>
+                    <option value="A" {% if hospital=='A' %}selected{% endif %}>Hospital A</option>
+                    <option value="B" {% if hospital=='B' %}selected{% endif %}>Hospital B</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary" style="height: 48px;">Filter Items</button>
+        </form>
+        {% endif %}
+
+        {% if inventory %}
+        <h3 style="margin-bottom: 1rem; color: var(--text-muted); font-size: 1.1rem;">
+            Current Stock in: <span style="color: var(--primary-color)">Hospital {{ hospital }}</span>
+        </h3>
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Quantity</th>
+                        <th>Cost</th>
+                        <th>Date Added</th>
+                        <th>Expiry Date</th>
+                        {% if session.get('role') == 'hospital_admin' %}
+                        <th>Actions</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in inventory %}
+                    <tr>
+                        <td style="font-weight: 500;">{{ item.name }}</td>
+                        <td>
+                            <span
+                                style="background: #e0f2fe; color: #0284c7; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.875rem; font-weight: 600;">
+                                {{ item.quantity }}
+                            </span>
+                        </td>
+                        <td>${{ item.cost }}</td>
+                        <td>{{ item.date_added }}</td>
+                        <td>{{ item.expiry_date }}</td>
+                        {% if session.get('role') == 'hospital_admin' %}
+                        <td style="display: flex; gap: 0.5rem;">
+                            <button class="btn btn-secondary" style="padding: 0.3rem 0.6rem; font-size: 0.8rem;"
+                                onclick="openEditModal('{{ item._id }}', '{{ item.name }}', '{{ item.quantity }}')">
+                                ✏️ Edit
+                            </button>
+                            <form method="POST" action="/delete_item/{{ item._id }}"
+                                onsubmit="return confirm('Are you sure you want to remove {{ item.name }}? This will log it as removed.');">
+                                <button type="submit" class="btn btn-danger"
+                                    style="padding: 0.3rem 0.6rem; font-size: 0.8rem;">
+                                    🗑️ Drop
+                                </button>
+                            </form>
+                        </td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% elif hospital %}
+        <div style="text-align: center; padding: 4rem 1rem; color: var(--text-muted);">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">📦</div>
+            <p>No inventory items found for Hospital {{ hospital }}.</p>
+            {% if session.get('role') == 'hospital_admin' %}
+            <a href="/add" class="btn btn-primary" style="margin-top: 1rem;">Add First Item</a>
+            {% endif %}
+        </div>
+        {% elif session.get('role') == 'distributor' %}
+        <div style="text-align: center; padding: 4rem 1rem; color: var(--text-muted);">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">🏥</div>
+            <p>Select a hospital above to view its inventory.</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Usage History Section -->
+    {% if usage_logs %}
+    <div class="card">
+        <h3 style="margin-bottom: 1.5rem; color: var(--text-main); font-size: 1.25rem;">📜 Usage History & Logs</h3>
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Item</th>
+                        <th>Action</th>
+                        <th>Change</th>
+                        <th>User</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for log in usage_logs %}
+                    <tr>
+                        <td style="color: var(--text-muted); font-size: 0.9rem;">{{ log.date.strftime('%Y-%m-%d %H:%M')
+                            }}</td>
+                        <td style="font-weight: 500;">{{ log.medication }}</td>
+                        <td>
+                            <span style="font-size: 0.8rem; font-weight: 600; padding: 0.2rem 0.5rem; border-radius: 9999px;
+                                {% if log.action == 'added' or log.action == 'restock' %}
+                                    background: #d1fae5; color: #065f46;
+                                {% elif log.action == 'removed' or log.action == 'usage' %}
+                                    background: #fee2e2; color: #991b1b;
+                                {% else %}
+                                    background: #f1f5f9; color: #475569;
+                                {% endif %}
+                            ">
+                                {{ log.action | upper }}
+                            </span>
+                        </td>
+                        <td
+                            style="font-weight: 600; {{ 'color: #16a34a;' if log.quantity_change > 0 else 'color: #dc2626;' }}">
+                            {{ '+' if log.quantity_change > 0 }}{{ log.quantity_change }}
+                        </td>
+                        <td style="color: var(--text-muted);">{{ log.user }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+
+<!-- Edit Quantity Modal -->
+<div class="modal-overlay" id="editModal">
+    <div class="modal-box">
+        <h3 style="margin-bottom: 1rem;">Update Quantity</h3>
+        <p id="editItemName" style="color: var(--text-muted); margin-bottom: 1.5rem;"></p>
+        <form id="editForm" method="POST">
+            <div class="form-group">
+                <label for="quantity" class="form-label">New Quantity</label>
+                <input type="number" class="form-control" id="editQuantity" name="quantity" min="0" required>
+            </div>
+            <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                <button type="submit" class="btn btn-primary" style="flex: 1;">Update</button>
+                <button type="button" class="btn btn-secondary" onclick="closeEditModal()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function openEditModal(itemId, itemName, currentQty) {
+        document.getElementById('editForm').action = '/update_item/' + itemId;
+        document.getElementById('editItemName').textContent = 'Editing: ' + itemName;
+        document.getElementById('editQuantity').value = currentQty;
+        document.getElementById('editModal').classList.add('active');
+        document.getElementById('editQuantity').focus();
+    }
+    function closeEditModal() {
+        document.getElementById('editModal').classList.remove('active');
+    }
+    document.getElementById('editModal').addEventListener('click', function (e) {
+        if (e.target === this) closeEditModal();
+    });
+</script>
+{% endblock %}
